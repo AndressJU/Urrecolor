@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Urrecolor | Estampado y sublimación personalizada</title>
+<meta name="description" content="Urrecolor: camisetas y mugs personalizados con sublimación y estampado de alta definición.">
+<meta name="theme-color" content="#09090b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    fontFamily: {
+      display: ['Syne', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif']
+    },
+    colors: {
+      ink: { 950: '#09090b', 900: '#111114', 800: '#17171c', 700: '#26262d' },
+      sun: { 300: '#ffe14d', 500: '#ff9d1c', 600: '#ff5b2e' }
+    }
+  } }
+}
+</script>
+<style>
+  :root { color-scheme: dark; --grad: linear-gradient(120deg, white, white 50%, white 100%); }
+  html { scroll-padding-top: 4.5rem; }
+  body { background: #09090b; color: #f2efe9; -webkit-font-smoothing: antialiased; }
+  :focus-visible { outline: 2px solid #ff9d1c; outline-offset: 3px; }
+  .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  /* Botones */
+  .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; padding: .85rem 1.7rem; font-weight: 700; transition: transform .25s, box-shadow .25s, filter .25s, border-color .25s, background .25s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn:disabled { opacity: .6; cursor: wait; transform: none; }
+  .btn-primary { background: var(--grad); color: #1a0f00; box-shadow: 0 8px 24px -10px rgba(255,140,30,.6); }
+  .btn-primary:hover { filter: brightness(1.1); box-shadow: 0 16px 32px -10px rgba(255,140,30,.8); }
+  .btn-ghost { border: 1px solid #2e2e36; color: #f2efe9; }
+  .btn-ghost:hover { border-color: #ff9d1c; background: rgba(255,157,28,.08); }
+
+  /* Paneles y tarjetas */
+  .panel { background: #111114; border: 1px solid #23232a; border-radius: 1.25rem; }
+  .lift { overflow: hidden; transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s, box-shadow .35s; }
+  .lift:hover { transform: translateY(-6px); border-color: #3b3b46; box-shadow: 0 24px 44px -24px rgba(255,140,30,.4); }
+
+  /* Placeholder de imagen */
+  .ph { position: relative; aspect-ratio: 4 / 5; display: grid; place-items: center; overflow: hidden;
+        background: radial-gradient(circle at 50% 38%, hsl(var(--h) 95% 55% / .24), transparent 62%), linear-gradient(160deg, #1a1a20, #0d0d10); }
+  .ph::before { content: ""; position: absolute; inset: 0;
+        background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+        background-size: 32px 32px; -webkit-mask-image: radial-gradient(circle at 50% 40%, #000, transparent 75%); mask-image: radial-gradient(circle at 50% 40%, #000, transparent 75%); }
+  .ph > svg { position: relative; transition: transform .5s cubic-bezier(.2,.8,.2,1), color .4s; }
+  .lift:hover .ph > svg { transform: scale(1.1) rotate(-3deg); color: rgba(255,200,120,.6); }
+
+  /* Navegación */
+  .nav-link { position: relative; color: #a8a8b2; transition: color .2s; }
+  .nav-link::after { content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; border-radius: 2px; background: var(--grad); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+  .nav-link:hover, .nav-link.active { color: #fff; }
+  .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+  /* Fondo con imagen para la portada */
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(9, 9, 11, 0.95) 0%,
+        rgba(9, 9, 11, 0.78) 45%,
+        rgba(9, 9, 11, 0.30) 100%
+      ),
+      url("imagenes/Estilo\ urbano\ Route\ 66.png");
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+  }
+  /* Oscurecimiento adicional para mantener la estética */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      0deg,
+      #09090b 0%,
+      transparent 35%,
+      rgba(9, 9, 11, 0.15) 100%
+    );
+    pointer-events: none;
+  }
+
+  /* Hamburguesa animada */
+  .bar { display: block; height: 2px; width: 22px; background: #f2efe9; border-radius: 2px; transition: transform .35s, opacity .25s; }
+  #menuBtn[aria-expanded="true"] .b1 { transform: translateY(7px) rotate(45deg); }
+  #menuBtn[aria-expanded="true"] .b2 { opacity: 0; transform: scaleX(0); }
+  #menuBtn[aria-expanded="true"] .b3 { transform: translateY(-7px) rotate(-45deg); }
+  #mobileMenu { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows .45s cubic-bezier(.2,.8,.2,1), opacity .35s, visibility 0s .45s; }
+  #mobileMenu.open { grid-template-rows: 1fr; opacity: 1; visibility: visible; transition-delay: 0s; }
+  #mobileMenu > div { overflow: hidden; }
+  #mobileMenu li { transform: translateY(-8px); opacity: 0; transition: transform .4s, opacity .4s; }
+  #mobileMenu.open li { transform: none; opacity: 1; }
+  #mobileMenu.open li:nth-child(2) { transition-delay: .05s; } #mobileMenu.open li:nth-child(3) { transition-delay: .1s; }
+  #mobileMenu.open li:nth-child(4) { transition-delay: .15s; } #mobileMenu.open li:nth-child(5) { transition-delay: .2s; }
+
+  /* Scroll reveal: fade-in-up */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Mariposa flotante */
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-14px) rotate(2deg); } }
+  .float { animation: float 7s ease-in-out infinite; }
+
+  /* Formulario */
+  .lbl { display: block; margin-bottom: .4rem; font-size: .85rem; font-weight: 600; color: #c9c9d1; }
+  .field { width: 100%; background: #0b0b0e; border: 1px solid #26262d; border-radius: .85rem; padding: .8rem 1rem; color: #f2efe9; transition: border-color .2s, box-shadow .2s; }
+  .field::placeholder { color: #5d5d68; }
+  .field:focus { outline: 0; border-color: #ff9d1c; box-shadow: 0 0 0 3px rgba(255,157,28,.18); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .float { animation: none; }
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<!-- Header -->
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-ink-950/80 backdrop-blur-xl">
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <div class="flex h-16 items-center justify-between">
+     <a href="#inicio" class="flex items-center gap-2.5" aria-label="Urrecolor, ir al inicio">
+  <img src="imagenes/logo_urrecolor-removebg-preview.png" alt="Logo Urrecolor" class="h-10 w-auto rounded-xl object-contain">
+  <span class="font-display text-xl font-bold tracking-tight">Urre<span class="grad-text">color</span></span>
+</a>
+      <nav class="hidden md:block" aria-label="Principal">
+        <ul class="flex items-center gap-8 text-sm font-semibold">
+          <li><a class="nav-link" href="#inicio">Inicio</a></li>
+          <li><a class="nav-link" href="#buzos">Buzos</a></li>
+          <li><a class="nav-link" href="#camisetas">Camisetas</a></li>
+          <li><a class="nav-link" href="#mugs">Mugs</a></li>
+          <li><a class="nav-link" href="#nosotros">Nosotros</a></li>
+          <li><a class="nav-link" href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <button id="menuBtn" class="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-xl md:hidden" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menú">
+        <span class="bar b1"></span><span class="bar b2"></span><span class="bar b3"></span>
+      </button>
+    </div>
+  </div>
+  <div id="mobileMenu" class="md:hidden">
+    <div>
+      <ul class="mx-auto max-w-7xl space-y-1 px-5 pb-6 pt-2 text-lg font-semibold sm:px-8">
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#inicio">Inicio</a></li>
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#buzos">Catálogo de buzos</a></li>
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#camisetas">Catálogo de camisetas</a></li>
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#mugs">Catálogo de mugs</a></li>
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#nosotros">Nosotros</a></li>
+        <li><a class="block rounded-xl px-4 py-3 text-zinc-300 hover:bg-white/5 hover:text-white" href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero con imagen de fondo -->
+<section id="inicio" class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
+  <div class="hero-background" aria-hidden="true"></div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
+    <div class="reveal max-w-3xl">
+      <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+        <span class="block font-bold text-white">Estampa tu historia.</span>
+        <span class="mt-2 block font-medium text-zinc-300">Sublima tu estilo.</span>
+      </h1>
+      <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
+        Buzos, camisetas y mugs personalizados con sublimación y estampado
+        de alta definición. Colores intensos, acabados impecables
+        y diseños hechos para durar.
+      </p>
+      <div class="mt-9 flex flex-wrap gap-4">
+        <a href="#buzos" class="btn btn-primary">Ver catálogos</a>
+        <a href="#contacto" class="btn btn-ghost">Pedir una cotización</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Catálogo de buzos -->
+  <section id="buzos" class="py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="reveal mb-12 max-w-2xl">
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de buzos</h2>
+        <p class="mt-4 text-zinc-400">Elige la base, sube tu diseño y lo llevamos a la tela con colores que no se apagan.</p>
+      </div>
+      <ul id="gridBuzos" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <div class="mt-12 flex justify-center reveal">
+        <a href="catalogo-buzos.html" class="btn btn-ghost">Ver catálogo completo de buzos</a>
+      </div>
+    </div>
+  </section>
+
+ <!-- Catálogo de camisetas -->
+  <section id="camisetas" class="py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="reveal mb-12 max-w-2xl">
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de camisetas</h2>
+        <p class="mt-4 text-zinc-400">Elige la base, sube tu diseño y lo llevamos a la tela con colores que no se apagan.</p>
+      </div>
+      <ul id="gridCamisetas" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <div class="mt-12 flex justify-center reveal">
+        <a href="catalogo-camisetas.html" class="btn btn-ghost">Ver catálogo completo de camisetas</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catálogo de mugs -->
+  <section id="mugs" class="border-y border-white/5 bg-ink-900/60 py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="reveal mb-12 max-w-2xl">
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de mugs</h2>
+        <p class="mt-4 text-zinc-400">Del café de la mañana al regalo perfecto: sublimación nítida de borde a borde.</p>
+      </div>
+      <ul id="gridMugs" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <div class="mt-12 flex justify-center reveal">
+        <a href="catalogo-mugs.html" class="btn btn-ghost">Ver catálogo completo de mugs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nosotros -->
+  <section id="nosotros" class="py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
+      <div class="reveal">
+        <h2 class="font-display text-3xl font-bold leading-tight tracking-tight sm:text-5xl">¿Quiénes somos?</h2>
+        <p class="mt-6 leading-relaxed text-zinc-400">Somos un equipo humano en permanente desarrollo personal y profesional, comprometido en obtener altos niveles de calidad, eficiencia y productividad. Trabajamos con la más avanzada tecnología para consolidar y mantener el liderazgo en la Industria de la Comunicación, garantizando un continuo mejoramiento en nuestros procesos.</p>
+        <h3 class="mt-10 font-display text-2xl font-bold tracking-tight">Nuestros objetivos</h3>
+        <p class="mt-4 leading-relaxed text-zinc-400">Nuestro principal objetivo es cumplir los más exigentes requerimientos de nuestros clientes a nivel Nacional, ofreciéndoles calidad ante todo, cumplimiento y responsabilidad en la entrega de nuestros trabajos.</p>
+      </div>
+      <dl class="divide-y divide-white/10 border-y border-white/10">
+        <div class="reveal flex gap-5 py-6"><span class="mt-2 h-10 w-1 shrink-0 rounded-full" style="background:var(--grad)"></span><div><dt class="font-display text-xl font-bold">Calidad</dt><dd class="mt-1 text-zinc-400">Materiales premium y tintas de larga duración que mantienen su brillo lavado tras lavado.</dd></div></div>
+        <div class="reveal flex gap-5 py-6"><span class="mt-2 h-10 w-1 shrink-0 rounded-full" style="background:var(--grad)"></span><div><dt class="font-display text-xl font-bold">Detalle</dt><dd class="mt-1 text-zinc-400">Revisamos cada diseño antes de producir para que lo que imaginas sea lo que recibes.</dd></div></div>
+        <div class="reveal flex gap-5 py-6"><span class="mt-2 h-10 w-1 shrink-0 rounded-full" style="background:var(--grad)"></span><div><dt class="font-display text-xl font-bold">Pasión</dt><dd class="mt-1 text-zinc-400">Nos encanta personalizar. Cada pedido, grande o pequeño, lo tratamos como único.</dd></div></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="border-t border-white/5 bg-ink-900/60 py-24">
+    <div class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="reveal mb-12 max-w-2xl">
+        <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Creemos algo juntos</h2>
+        <p class="mt-4 text-zinc-400">Cuéntanos tu idea y te respondemos con una cotización a tu medida.</p>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-5">
+        <div class="reveal lg:col-span-3">
+          
+          <!-- FORMULARIO ACTUALIZADO PARA ENVIAR ARCHIVOS SIN AJAX -->
+          <form id="contactForm" class="panel space-y-5 p-6 sm:p-8" action="https://formsubmit.co/Andresjauregui802@gmail.com" method="POST" enctype="multipart/form-data">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div><label class="lbl" for="nombre">Nombre</label><input class="field" id="nombre" name="Nombre" type="text" required autocomplete="name" placeholder="Tu nombre"></div>
+              <div><label class="lbl" for="telefono">Teléfono</label><input class="field" id="telefono" name="Teléfono" type="tel" required minlength="7" inputmode="tel" autocomplete="tel" placeholder="Tu número de contacto"></div>
+              <div class="sm:col-span-2"><label class="lbl" for="email">Correo electrónico</label><input class="field" id="email" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></div>
+            </div>
+            
+            <div><label class="lbl" for="mensaje">¿Qué estás buscando?</label><textarea class="field resize-y" id="mensaje" name="Mensaje" rows="5" required placeholder="Cuéntanos qué quieres estampar o sublimar, cantidades, fechas…"></textarea></div>
+            
+            <!-- CAMPO: Subida de archivos -->
+            <div>
+              <label class="lbl" for="attachment">Sube tu diseño o idea (Opcional)</label>
+              <input class="field cursor-pointer file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:bg-sun-500 file:px-4 file:py-2 file:text-sm file:font-bold file:text-ink-950 hover:file:bg-sun-600 file:transition-colors" id="attachment" name="attachment" type="file" accept="image/*, .pdf">
+            </div>
+            
+            <!-- Campos técnicos de FormSubmit: asunto del correo, formato en tabla, sin captcha y antispam oculto -->
+            <input type="hidden" name="_subject" value="Nueva solicitud de cliente | Urrecolor">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+            
+            <div class="flex flex-wrap items-center gap-4">
+              <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            </div>
+          </form>
+
+        </div>
+        <div class="reveal lg:col-span-2">
+          <div class="panel h-full space-y-7 p-6 sm:p-8">
+            <div><p class="text-sm text-zinc-500">Correo</p><a class="mt-1 block text-lg font-semibold hover:text-sun-500" href="mailto:purregogalvis@gmail.com">purregogalvis@gmail.com</a></div>
+            <div><p class="text-sm text-zinc-500">Teléfono y WhatsApp</p><a class="mt-1 block text-lg font-semibold hover:text-sun-500" href="tel:+573138682463">+57 313 868 2463</a></div>
+            <div>
+              <p class="text-sm text-zinc-500">Redes sociales</p>
+              <div class="mt-3 flex flex-wrap gap-3">
+                <a class="btn btn-ghost !px-4 !py-2 text-sm" href="https://www.instagram.com/sublimacion_urrecolor/" target="_blank" rel="noopener">Instagram</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-white/5 py-8">
+  <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 text-sm text-zinc-500 sm:flex-row sm:px-8">
+    <span class="flex items-center gap-2"><svg class="h-5 w-5" viewBox="0 0 64 64"><use href="#butterfly"/></svg><span class="font-display font-bold text-zinc-300">Urrecolor</span></span>
+    <p>&copy; <span id="year"></span> Urrecolor. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  const $ = s => document.querySelector(s);
+
+  const shirtIcon = '<svg viewBox="0 0 64 64" class="h-24 w-24 text-white/25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M22 8 8 14l4 12 6-3v31h28V23l6 3 4-12-14-6c-2 4-6 6-10 6s-8-2-10-6z"/></svg>';
+  const mugIcon = '<svg viewBox="0 0 64 64" class="h-24 w-24 text-white/25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M14 16h30v28a8 8 0 0 1-8 8H22a8 8 0 0 1-8-8z"/><path d="M44 22h5a6 6 0 0 1 0 14h-5"/></svg>';
+  const buztIcon = '<svg viewBox="0 0 64 64" class="h-24 w-24 text-white/25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="M22 8 8 14l4 12 6-3v31h28V23l6 3 4-12-14-6c-2 4-6 6-10 6s-8-2-10-6z"/></svg>';
+
+ const buzos = [
+    { n: 'Mirada Intensa · Look', t: 'Estampado', d: 'Buzo negro con ilustración de ojos estilo manga y tipografía "LOOK" en color rojo sangre. Ideal para un estilo urbano y atrevido.', img: 'imagenes/buzos/Hoodie negro con mirada intensa y “LOOK”.png' },
+    { n: 'Retrato Mascota · Copito', t: 'Estampado', d: 'Buzo negro personalizado con ilustración detallada de un perro y su nombre "COPITO" en tono naranja. Perfecto para llevar a tu mascota contigo.', img: 'imagenes/buzos/copitoBuzo.jpeg' },
+    { n: 'Skater Urbano · Street', t: 'Estampado', d: 'Buzo negro con silueta de skater sobre ciudad y letras estilo graffiti "STREET" en amarillo vibrante. Un clásico de la moda callejera.', img: 'imagenes/buzos/buzosEj/sudadera_02.png' },
+    { n: 'Motor JDM · Neo-Tokyo', t: 'Estampado', d: 'Buzo negro con gráfico de coche deportivo en derrape y texto "NEO-TOKYO" en rojo. Especial para fanáticos de la velocidad y el estilo japonés.', img: 'imagenes/buzos/buzosEj/sudadera_01.png' },
+    { n: 'Motivacional · Never Give Up', t: 'Estampado', d: 'Buzo negro con el mensaje inspirador "NEVER GIVE UP" en tipografía moderna roja y blanca. Comodidad y actitud en una sola prenda.', img: 'imagenes/buzos/Sudadera negra Nunca te rindas.png' },
+    { n: 'Cyberpunk · Glitch', t: 'Estampado', d: 'Buzo negro con diseño futurista y texto "GLITCH" en tonos verde neón con elementos geométricos. Destaca con una estética tecnológica.', img: 'imagenes/buzos/buzosEj/sudadera_03.png' }
+  ];
+
+  const camisetas = [
+    { n: 'Tigre azul eléctrico', t: 'Sublimación', d: 'Diseño de tigre en tonos azules con efecto artístico sobre camiseta negra, ideal para destacar con un estilo moderno.', img: 'imagenes/camisetas/felino azul azul.png' },
+    { n: 'KISS · Rock legendario', t: 'Estampado', d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.', img: 'imagenes/camisetas/KISS4.png' },
+    { n: 'Irradia vibraciones positivas', t: 'Estampado', d: 'Camiseta blanca con un diseño floral retro en tonos amarillos y marrones. Un estilo alegre, vintage y lleno de buenas vibraciones.', img: 'imagenes/camisetas/IRRADIA VIBRACIONES.png' },
+    { n: 'John Lennon · Música y arte', t: 'Estampado', d: 'Diseño en blanco y negro con retrato de John Lennon, ideal para quienes buscan una camiseta con personalidad musical.', img: 'imagenes/camisetas/LENON.png' },
+    { n: 'Open Your Eyes', t: 'Estampado', d: 'Diseño en blanco y negro con tipografía desgastada y un ojo central, perfecto para un look urbano alternativo.', img: 'imagenes/camisetas/OPEN YOUR OJO.png' },
+    { n: 'Arte abstracto multicolor', t: 'Estampado', d: 'Camiseta blanca con un diseño ornamental de formas curvas y colores vibrantes. Un estilo moderno, artístico y lleno de personalidad.', img: 'imagenes/camisetas/gotas color.png' }
+  ];
+
+  const mugs = [
+    { n: 'Black Sabbath · Edición rock', t: 'Sublimación', d: 'Taza blanca con un diseño de Black Sabbath, llamas y una ilustración gótica. Ideal para los amantes del heavy metal y el rock.', img: 'imagenes/mugs/black sabbath.png' },
+    { n: 'Mug CAFE · Diseño minimalista', t: 'Efecto especial', d: 'Taza con letras negras de gran tamaño y estilo artístico, perfecta para quienes buscan un diseño sencillo y llamativo.', img: 'imagenes/mugs/cafe.png' },
+    { n: 'Route 66 · Estilo vintage', t: 'Sublimación', d: 'Taza blanca con el emblemático escudo de la Ruta 66, inspirada en los viajes por carretera y la estética americana retro.', img: 'imagenes/mugs/mug ROUTE.png' },
+    { n: 'Mirada misteriosa', t: 'Sublimación', d: 'Taza blanca con una ilustración de una mirada intensa, cubierta con un velo texturizado en tonos grises y negros.', img: 'imagenes/mugs/MUSULMAN.png' },
+    { n: 'Taza negra · Café y vapor', t: 'Sublimación', d: 'Taza negra de estilo elegante y minimalista, ideal para disfrutar de un café con un diseño sobrio y moderno.', img: 'imagenes/mugs/posillo negro.png' },
+    { n: 'Fútbol americano · Arte deportivo', t: 'Pedidos por mayor', d: 'Taza blanca con una ilustración deportiva multicolor de un jugador de fútbol americano. Perfecta para aficionados y regalos personalizados.', img: 'imagenes/mugs/FUT AMERI1.png' }
+  ];
+
+  const hues = [40, 24, 14, 48, 30, 18];
+
+  function renderGrid(id, list, icon, noun) {
+    $(id).innerHTML = list.map((p, i) => `
+      <li class="reveal" style="transition-delay:${(i % 3) * 90}ms">
+        <article class="panel lift flex h-full flex-col">
+          <div class="ph" style="--h:${hues[i % hues.length]}">
+            ${p.img
+              ? `<img src="${p.img}" alt="${p.n}" class="absolute inset-0 h-full w-full object-cover" loading="lazy">`
+              : `${icon}<span class="absolute bottom-4 text-xs text-white/30">Foto próximamente</span>`}
+          </div>
+          <div class="flex flex-1 flex-col p-5">
+            <span class="text-sm font-semibold text-sun-500">${p.t}</span>
+            <h3 class="mt-1 font-display text-lg font-bold">${p.n}</h3>
+            <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">${p.d}</p>
+            <button type="button" class="btn btn-ghost mt-5 w-full !py-2.5 text-sm" data-product="${p.n}" data-noun="${noun}">Cotizar ${noun}</button>
+          </div>
+        </article>
+      </li>`).join('');
+  }
+  renderGrid('#gridCamisetas', camisetas, shirtIcon, 'camiseta');
+  renderGrid('#gridMugs', mugs, mugIcon, 'mug');
+  renderGrid('#gridBuzos', buzos, buztIcon, 'buzo');
+
+  /* Botón "Cotizar": lleva al formulario con el producto ya mencionado */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-product]');
+    if (!b) return;
+    const msg = $('#mensaje');
+    msg.value = `Hola Urrecolor, quiero cotizar: ${b.dataset.product} (${b.dataset.noun}). `;
+    $('#contacto').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => msg.focus({ preventScroll: true }), 700);
+  });
+
+  /* ---------- Menú móvil ---------- */
+  const btn = $('#menuBtn'), menu = $('#mobileMenu');
+  const setMenu = open => {
+    btn.setAttribute('aria-expanded', open);
+    btn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    menu.classList.toggle('open', open);
+  };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('resize', () => innerWidth >= 768 && setMenu(false));
+  addEventListener('keydown', e => e.key === 'Escape' && setMenu(false));
+
+  /* ---------- Scroll reveal (Intersection Observer) ---------- */
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) { en.target.classList.add('in'); obs.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ---------- Enlace activo del menú ---------- */
+  const links = [...document.querySelectorAll('.nav-link')];
+  const spy = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + en.target.id));
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
+
+  $('#year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
