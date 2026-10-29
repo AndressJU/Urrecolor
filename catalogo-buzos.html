@@ -101,78 +101,30 @@ tailwind.config = {
   const $= s => document.querySelector(s);$('#year').textContent = new Date().getFullYear();
 
   // Aquí pegas TODO tu arreglo largo de camisetas (puedes agregar muchísimas más)
-  const buzos = [
-  {
-    n: 'Tigre azul eléctrico',
-    t: 'Sublimación',
-    d: 'Diseño de tigre en tonos azules con efecto artístico sobre camiseta negra, ideal para destacar con un estilo moderno.',
-    img: 'imagenes/buzos/Hoodie negro con mirada intensa y “LOOK”.png'
-  },
-  {
-    n: 'Tigre azul eléctrico',
-    t: 'Sublimación',
-    d: 'Diseño de tigre en tonos azules con efecto artístico sobre camiseta negra, ideal para destacar con un estilo moderno.',
-    img: 'imagenes/buzos/copitoBuzo.jpeg'
-  },
-  {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_02.png'
-  },
- 
-  {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_01.png'
-  },
-   {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_09.png'
-  },
-  {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_06.png'
-  },
-  {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/Sudadera negra Nunca te rindas.png'
-  },
-  {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_03.png'
-  },
+ const buzos = [
 
-  // SEPARADOR
+  { n: 'Mirada Intensa · Look', t: 'Sublimación', d: 'Buzo negro con estampado de ojos intensos y la palabra "LOOK" en texto rojo.', img: 'imagenes/buzos/Hoodie negro con mirada intensa y “LOOK”.png' },
+  { n: 'Héroe · Escudo Grunge', t: 'Estampado', d: 'Buzo blanco con el icónico escudo del Capitán América en un diseño de salpicaduras de pintura.', img: 'imagenes/buzos/buzosEj/new.jpeg' },
+  { n: 'Mascota · Copito', t: 'Sublimación', d: 'Buzo negro con ilustración minimalista en líneas blancas de un perro y el nombre "Copito".', img: 'imagenes/buzos/copitoBuzo.jpeg' },
+  { n: 'Tropical · Sunset', t: 'Estampado', d: 'Buzo blanco con una vibrante ilustración de un atardecer en la playa con palmeras.', img: 'imagenes/buzos/buzosEj/new1.jpeg' },
+  { n: 'Skate · Street', t: 'Estampado', d: 'Buzo negro con la palabra "STREET" en tonos cálidos y la silueta de un skater en acción.', img: 'imagenes/buzos/buzosEj/sudadera_02.png' },
+  { n: 'Cyberpunk · Neo-Tokyo', t: 'Estampado', d: 'Buzo negro con estilo futurista, letras "NEO-TOKYO" en rojo y la ilustración de un auto deportivo.', img: 'imagenes/buzos/buzosEj/sudadera_01.png' },
+  { n: 'Deportivo · Splash', t: 'Estampado', d: 'Buzo beige con el logotipo deportivo decorado con salpicaduras de pintura negra y amarilla.', img: 'imagenes/buzos/buzosEj/new2.jpeg' },
+  { n: 'Urbano · Street Dogs', t: 'Estampado', d: 'Buzo negro con la frase "STREET DOGS UNDERGROUND" y el gráfico de un perro feroz.', img: 'imagenes/buzos/buzosEj/sudadera_09.png' },
+  { n: 'Universitario · Bulldogs', t: 'Estampado', d: 'Buzo blanco con tipografía colegial roja y la ilustración de una mascota bulldog.', img: 'imagenes/buzos/buzosEj/new3.jpeg' },
+  { n: 'Calavera · Off The Grid', t: 'Estampado', d: 'Buzo negro con diseño circular "OFF THE GRID" y una mano de esqueleto sosteniendo una patineta.', img: 'imagenes/buzos/buzosEj/sudadera_06.png' },
+  { n: 'Motivacional · Never Give Up', t: 'Estampado', d: 'Buzo negro con la frase inspiracional "NEVER GIVE UP" en tipografía roja de estilo urbano.', img: 'imagenes/buzos/Sudadera negra Nunca te rindas.png' },
+  { n: 'Héroe · Spider', t: 'Estampado', d: 'Buzo rojo con el logotipo negro de una araña en el pecho.', img: 'imagenes/buzos/buzosEj/new4.jpeg' },
+  { n: 'Urbano · Glitch', t: 'Estampado', d: 'Buzo negro con la palabra "GLITCH" destacada en tonos verdes neón con efecto de distorsión digital.', img: 'imagenes/buzos/buzosEj/sudadera_03.png' },
+  { n: 'Rock · Metal Shield', t: 'Estampado', d: 'Buzo verde oliva con ilustración de calavera, alas, un escudo y el texto "ROCK METAL".', img: 'imagenes/buzos/buzosEj/new5.jpeg' },
+  { n: 'Calavera · Rebels', t: 'Estampado', d: 'Buzo negro con el texto "REBELS" sobre la ilustración de una calavera usando auriculares.', img: 'imagenes/buzos/buzosEj/sudadera_04.png' },
+  { n: 'Oriental · Tiger', t: 'Estampado', d: 'Buzo negro con un gráfico de tigre blanco, letras "TIGER" y caracteres asiáticos en color rojo.', img: 'imagenes/buzos/buzosEj/sudadera_05.png' },
+  { n: 'Gótico · Calaveras', t: 'Estampado', d: 'Buzo blanco con estampado simétrico de calaveras y detalles gráficos en rojo.', img: 'imagenes/buzos/buzosEj/new6.jpeg' }
 
-   {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_04.png'
-  },
-  
-   {
-    n: 'KISS · Rock legendario',
-    t: 'Estampado',
-    d: 'Camiseta negra con el icónico diseño de KISS en llamas y colores vibrantes, perfecta para los amantes del rock.',
-    img: 'imagenes/buzos/buzosEj/sudadera_05.png'
-  },
-  
-   
-  
-  
+
 
 ];
+
 
   const BuzIcon = '<svg viewBox="0 0 64 64" class="h-16 w-16 text-white/20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 8 8 14l4 12 6-3v31h28V23l6 3 4-12-14-6c-2 4-6 6-10 6s-8-2-10-6z"/></svg>';
   
