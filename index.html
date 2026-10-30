@@ -8,6 +8,7 @@
 <meta name="theme-color" content="#09090b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
@@ -167,26 +168,31 @@ tailwind.config = {
 
 <main>
   <!-- Hero con imagen de fondo -->
+<!-- Hero con imagen de fondo -->
+<!-- Hero con imagen de fondo -->
 <section id="inicio" class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
   <div class="hero-background" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
-    <div class="reveal max-w-3xl">
+    
+    <!-- Reducimos el margen (ml-4 sm:ml-6) para moverlo más hacia la izquierda -->
+    <div class="reveal max-w-3xl text-left ml-4 sm:ml-6">
 
       <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
-  <span class="block font-bold text-red-800" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.1em;">Estampa tu historia.</span>
-<span class="block text-zinc-300" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; text-transform: none;">Sublima tu estilo.</span></h1>
-
+        <span class="block font-bold text-red-600" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; font-size: 1.1em;">ESTAMPA TU HISTORIA.</span>
+<span class="block text-zinc-200" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.02em; text-transform: none;">Sublima tu estilo.</span>      </h1>
       
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
         Buzos, camisetas y mugs personalizados con sublimación y estampado
         de alta definición. Colores intensos, acabados impecables
         y diseños hechos para durar.
       </p>
-      <div class="mt-9 flex flex-wrap gap-4">
+
+      <div class="mt-8 flex flex-wrap items-center gap-4">
         <a href="#buzos" class="btn btn-primary">Ver catálogos</a>
         <a href="#contacto" class="btn btn-ghost">Pedir una cotización</a>
       </div>
+
     </div>
   </div>
 </section>
