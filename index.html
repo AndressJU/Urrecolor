@@ -68,10 +68,10 @@ tailwind.config = {
     z-index: -2;
     background-image:
       linear-gradient(
-        90deg,
-        rgba(9, 9, 11, 0.95) 0%,
-        rgba(9, 9, 11, 0.78) 45%,
-        rgba(9, 9, 11, 0.30) 100%
+        60deg,
+        rgba(9, 9, 11, 0.45) 0%,   /* Antes estaba en 0.95 (más translúcido) */
+        rgba(9, 9, 11, 0.25) 45%,   /* Antes estaba en 0.78 */
+        rgba(9, 9, 11, 0.05) 100%   /* Antes estaba en 0.30 */
       ),
       url("imagenes/Estilo\ urbano\ Route\ 66.png");
     background-size: cover;
@@ -175,8 +175,7 @@ tailwind.config = {
 
       <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
   <span class="block font-bold text-red-800" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">Estampa tu historia.</span>
- <span class="block font-bold text-zinc-300" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">Sublima tu estilo.</span>
-</h1>
+<span class="block text-zinc-300" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; text-transform: none;">Sublima tu estilo.</span></h1>
 
       
       <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
