@@ -69,7 +69,10 @@ tailwind.config = {
 
   .hero-background {
     position: absolute;
-    inset: 0;
+   top: 4rem; 
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -2;
     background-image:
       /* Degradado de izquierda a derecha para PC: tapa el buzo izquierdo, deja ver a la pareja a la derecha */
@@ -89,6 +92,10 @@ tailwind.config = {
     .hero-background {
       /* Mueve la imagen a la derecha para centrar a ambos modelos */
       background-position: 70% 10%; 
+      top: 4rem; 
+    left: 0;
+    right: 0;
+    bottom: 0;
       background-image:
         /* Degradado de arriba hacia abajo para móvil: contrasta el texto centrado */
         linear-gradient(
