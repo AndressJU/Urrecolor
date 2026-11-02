@@ -72,9 +72,9 @@ tailwind.config = {
     background-image:
       linear-gradient(
         60deg,
-        rgba(9, 9, 11, 0.45) 0%,   /* Antes estaba en 0.95 (más translúcido) */
-        rgba(9, 9, 11, 0.25) 45%,   /* Antes estaba en 0.78 */
-        rgba(9, 9, 11, 0.05) 100%   /* Antes estaba en 0.30 */
+        rgba(9, 9, 11, 0.45) 0%,
+        rgba(9, 9, 11, 0.25) 45%,
+        rgba(9, 9, 11, 0.05) 100%
       ),
       url("imagenes/Estilo\ urbano\ Route\ 66.png");
     background-size: cover;
@@ -169,15 +169,12 @@ tailwind.config = {
 </header>
 
 <main>
-  <!-- Hero con imagen de fondo -->
-<!-- Hero con imagen de fondo -->
 <!-- Hero con imagen de fondo -->
 <section id="inicio" class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
   <div class="hero-background" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
     
-    <!-- Reducimos el margen (ml-4 sm:ml-6) para moverlo más hacia la izquierda -->
     <div class="reveal max-w-3xl text-left ml-4 sm:ml-6">
 
       <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
@@ -221,7 +218,7 @@ tailwind.config = {
         <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de buzos</h2>
         <p class="mt-4 text-zinc-400">Elige la base, sube tu diseño y lo llevamos a la tela con colores que no se apagan.</p>
       </div>
-      <ul id="gridBuzos" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <ul id="gridBuzos" class="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"></ul>
       <div class="mt-12 flex justify-center reveal">
         <a href="catalogo-buzos.html" class="btn btn-ghost">Ver catálogo completo de buzos</a>
       </div>
@@ -235,7 +232,7 @@ tailwind.config = {
         <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de camisetas</h2>
         <p class="mt-4 text-zinc-400">Elige la base, sube tu diseño y lo llevamos a la tela con colores que no se apagan.</p>
       </div>
-      <ul id="gridCamisetas" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <ul id="gridCamisetas" class="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"></ul>
       <div class="mt-12 flex justify-center reveal">
         <a href="catalogo-camisetas.html" class="btn btn-ghost">Ver catálogo completo de camisetas</a>
       </div>
@@ -249,7 +246,7 @@ tailwind.config = {
         <h2 class="font-display text-3xl font-bold tracking-tight sm:text-5xl">Catálogo de mugs</h2>
         <p class="mt-4 text-zinc-400">Del café de la mañana al regalo perfecto: sublimación nítida de borde a borde.</p>
       </div>
-      <ul id="gridMugs" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></ul>
+      <ul id="gridMugs" class="grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-3"></ul>
       <div class="mt-12 flex justify-center reveal">
         <a href="catalogo-mugs.html" class="btn btn-ghost">Ver catálogo completo de mugs</a>
       </div>
@@ -366,15 +363,18 @@ tailwind.config = {
               ? `<img src="${p.img}" alt="${p.n}" class="absolute inset-0 h-full w-full object-cover" loading="lazy">`
               : `${icon}<span class="absolute bottom-4 text-xs text-white/30">Foto próximamente</span>`}
           </div>
-          <div class="flex flex-1 flex-col p-5">
-            <span class="text-sm font-semibold text-sun-500">${p.t}</span>
-            <h3 class="mt-1 font-display text-lg font-bold">${p.n}</h3>
-            <p class="mt-2 flex-1 text-sm leading-relaxed text-zinc-400">${p.d}</p>
-            <button type="button" class="btn btn-ghost mt-5 w-full !py-2.5 text-sm" data-product="${p.n}" data-noun="${noun}">Cotizar ${noun}</button>
+          <div class="flex flex-1 flex-col p-3 sm:p-5">
+            <span class="text-[10px] sm:text-sm font-semibold text-sun-500">${p.t}</span>
+            <h3 class="mt-1 font-display text-sm sm:text-lg font-bold leading-tight">${p.n}</h3>
+            <p class="mt-1 sm:mt-2 flex-1 text-xs sm:text-sm leading-relaxed text-zinc-400 line-clamp-3 sm:line-clamp-none">${p.d}</p>
+            <button type="button" class="btn btn-ghost mt-3 sm:mt-5 w-full !py-2 sm:!py-2.5 text-xs sm:text-sm" data-product="${p.n}" data-noun="${noun}">
+              Cotizar <span class="hidden sm:inline">${noun}</span>
+            </button>
           </div>
         </article>
       </li>`).join('');
   }
+  
   renderGrid('#gridCamisetas', camisetas, shirtIcon, 'camiseta');
   renderGrid('#gridMugs', mugs, mugIcon, 'mug');
   renderGrid('#gridBuzos', buzos, buztIcon, 'buzo');
