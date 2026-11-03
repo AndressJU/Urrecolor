@@ -309,34 +309,32 @@ tailwind.config = {
       <div class="grid gap-8 lg:grid-cols-5">
         <div class="reveal lg:col-span-3">
           
-          <!-- FORMULARIO ACTUALIZADO CON WEB3FORMS -->
-<form id="contactForm" class="panel space-y-5 p-6 sm:p-8" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
-  
-  <!-- IKABIL DITOY TI ACCESS KEY A NAISUAN MANIPUD TI WEB3FORMS -->
-  <input type="hidden" name="access_key" value="TI_ACCESS_KEY_DIGAY_MO_DITOY">
-
-  <div class="grid gap-5 sm:grid-cols-2">
-    <div><label class="lbl" for="nombre">Nombre</label><input class="field" id="nombre" name="Nombre" type="text" required autocomplete="name" placeholder="Tu nombre"></div>
-    <div><label class="lbl" for="telefono">Teléfono</label><input class="field" id="telefono" name="Teléfono" type="tel" required minlength="7" inputmode="tel" autocomplete="tel" placeholder="Tu número de contacto"></div>
-    <div class="sm:col-span-2"><label class="lbl" for="email">Correo electrónico</label><input class="field" id="email" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></div>
-  </div>
-  
-  <div><label class="lbl" for="mensaje">¿Qué estás buscando?</label><textarea class="field resize-y" id="mensaje" name="Mensaje" rows="5" required placeholder="Cuéntanos qué quieres estampar o sublimar, cantidades, fechas…"></textarea></div>
-  
-  <!-- CAMPO: Subida de archivos -->
-  <div>
-    <label class="lbl" for="attachment">Sube tu diseño o idea (Opcional)</label>
-    <input class="field cursor-pointer file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:bg-sun-500 file:px-4 file:py-2 file:text-sm file:font-bold file:text-ink-950 hover:file:bg-sun-600 file:transition-colors" id="attachment" name="attachment" type="file" accept="image/*, .pdf">
-  </div>
-  
-  <!-- Configuración ge ti Web3Forms: Asunto ti email ken panag-redirect kalpasan ti panag-submit -->
-  <input type="hidden" name="subject" value="Nueva solicitud de cliente | Urrecolor">
-  <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-  
-  <div class="flex flex-wrap items-center gap-4">
-    <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-  </div>
-</form>
+          <!-- FORMULARIO ACTUALIZADO PARA ENVIAR ARCHIVOS SIN AJAX -->
+          <form id="contactForm" class="panel space-y-5 p-6 sm:p-8" action="https://formsubmit.co/andresjauregui802@gmail.com" method="POST" enctype="multipart/form-data">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div><label class="lbl" for="nombre">Nombre</label><input class="field" id="nombre" name="Nombre" type="text" required autocomplete="name" placeholder="Tu nombre"></div>
+              <div><label class="lbl" for="telefono">Teléfono</label><input class="field" id="telefono" name="Teléfono" type="tel" required minlength="7" inputmode="tel" autocomplete="tel" placeholder="Tu número de contacto"></div>
+              <div class="sm:col-span-2"><label class="lbl" for="email">Correo electrónico</label><input class="field" id="email" name="email" type="email" required autocomplete="email" placeholder="tu@correo.com"></div>
+            </div>
+            
+            <div><label class="lbl" for="mensaje">¿Qué estás buscando?</label><textarea class="field resize-y" id="mensaje" name="Mensaje" rows="5" required placeholder="Cuéntanos qué quieres estampar o sublimar, cantidades, fechas…"></textarea></div>
+            
+            <!-- CAMPO: Subida de archivos -->
+            <div>
+              <label class="lbl" for="attachment">Sube tu diseño o idea (Opcional)</label>
+              <input class="field cursor-pointer file:mr-4 file:cursor-pointer file:rounded-full file:border-0 file:bg-sun-500 file:px-4 file:py-2 file:text-sm file:font-bold file:text-ink-950 hover:file:bg-sun-600 file:transition-colors" id="attachment" name="attachment" type="file" accept="image/*, .pdf">
+            </div>
+            
+            <!-- Campos técnicos de FormSubmit: asunto del correo, formato en tabla, sin captcha y antispam oculto -->
+            <input type="hidden" name="_subject" value="Nueva solicitud de cliente | Urrecolor">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+            
+            <div class="flex flex-wrap items-center gap-4">
+              <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+            </div>
+          </form>
 
         </div>
         <div class="reveal lg:col-span-2">
