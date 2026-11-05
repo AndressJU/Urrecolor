@@ -111,22 +111,24 @@ tailwind.config = {
 
 /* FONDO PARA MÓVILES Y TABLETS */
 @media screen and (max-width: 768px) {
-
     .hero-background {
+        top: 4rem; 
         background-image:
+            /* Degradado que va de Izquierda (oscuro) a Derecha (transparente) */
             linear-gradient(
-                to bottom,
-                rgba(9, 9, 11, 0.95) 0%,
-                rgba(9, 9, 11, 0.75) 50%,
-                rgba(9, 9, 11, 0.3) 100%
+                to right,
+                rgba(9, 9, 11, 0.98) 0%,   /* Casi negro a la izquierda para el texto */
+                rgba(9, 9, 11, 0.85) 55%,  /* Se mantiene oscuro hasta la mitad */
+                rgba(9, 9, 11, 0.1) 100%   /* Transparente a la derecha para ver la foto */
             ),
-            url("imagenes/fondoAlterno2.png");
+            url("imagenes/fondoAlterno3.png");
 
         background-size: cover;
-        background-position: center center;
+        /* El 85% mueve la imagen hacia la derecha, 'top' la alinea arriba */
+        background-position: 50% center; 
         background-repeat: no-repeat;
-    }
 
+    }
 }
 
   /* Hamburguesa animada */
@@ -204,31 +206,41 @@ tailwind.config = {
 
 <main>
 <!-- Hero con imagen de fondo -->
-<section id="inicio" class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
+ <section id="inicio" class="relative isolate flex min-h-[100svh] items-center overflow-hidden pt-16">
   <div class="hero-background" aria-hidden="true"></div>
   <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
+  
+  <!-- Contenedor principal de la portada -->
+  <div class="relative z-10 flex min-h-[85vh] flex-col items-start justify-center px-6 text-left sm:px-12">
     
-<div class="reveal max-w-3xl text-center sm:text-left px-2 sm:px-0 sm:ml-6 mx-auto sm:mx-0">      
-
-      <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
-        <span class="block font-bold text-red-600"  style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; font-size: 1.1em;">ESTAMPA TU HISTORIA.</span>
-<span class="block text-zinc-200" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.02em; text-transform: none;">Sublima tu estilo.</span>      </h1>
+    <!-- Contenedor del texto limitando el ancho -->
+    <div class="w-full max-w-[85%] sm:max-w-lg">
       
-      <p class="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
+      <!-- Título con los colores y mayúsculas antiguos -->
+              <h1 class="font-sans text-4xl leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+         <span class="block font-bold text-red-600"  style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.08em; font-size: 1.1em;">ESTAMPA TU HISTORIA.</span>
+         <span class="block text-zinc-200" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 600; letter-spacing: 0.02em; text-transform: none;">Sublima tu estilo.</span>      
+      </h1>
+      </h1>
+
+      <!-- Párrafo limpio con la fuente por defecto -->
+      <p class="mt-5 text-sm sm:text-lg leading-relaxed text-zinc-300">
         Buzos, camisetas y mugs personalizados con sublimación y estampado
         de alta definición. Colores intensos, acabados impecables
         y diseños hechos para durar.
       </p>
 
-<div class="mt-8 flex flex-wrap items-center justify-center sm:justify-start gap-4">
+      <!-- Botones con los estilos antiguos -->
+      <div class="mt-8 flex flex-col gap-4 w-full max-w-[250px]">
           <a href="#buzos" class="btn btn-primary">Ver catálogos</a>
-        <a href="#contacto" class="btn btn-ghost">Pedir una cotización</a>
+          <a href="#contacto" class="btn btn-ghost">Pedir una cotización</a>
+
       </div>
 
     </div>
   </div>
 </section>
+
 <!-- Nosotros -->
   <section id="nosotros" class="py-24">
     <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
