@@ -67,67 +67,67 @@ tailwind.config = {
   /* Fondo con imagen para la portada */
   
 /* Fondo con imagen para la portada (Escritorio / PC) */
-  .hero-background {
+  /* FONDO PARA PC */
+.hero-background {
     position: absolute;
-    top: 4rem; 
+    top: 4rem;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: -2;
+
     background-image:
-      linear-gradient(
-        60deg,
-        rgba(9, 9, 11, 0.45) 0%,
-        rgba(9, 9, 11, 0.25) 45%,
-        rgba(9, 9, 11, 0.05) 100%
-      ),
-      url("imagenes/Estilo urbano Route 66.png");
+        linear-gradient(
+            60deg,
+            rgba(9, 9, 11, 0.45) 0%,
+            rgba(9, 9, 11, 0.25) 45%,
+            rgba(9, 9, 11, 0.05) 100%
+        ),
+        url("imagenes/Estilo urbano Route 66.png");
+
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
-  }
+}
 
-  /* Oscurecimiento adicional para mantener la estética */
-  .hero-overlay {
+/* OVERLAY */
+.hero-overlay {
     position: absolute;
     top: 4rem;
     left: 0;
     right: 0;
     bottom: 0;
     z-index: -1;
-    background: linear-gradient(
-      0deg,
-      #09090b 0%,
-      transparent 35%,
-      rgba(9, 9, 11, 0.15) 100%
-    );
-    pointer-events: none;
-  }
 
-  /* Ajustes SOLO para Móvil (menor a 640px) */
-  /* Ajustes para Móvil y Tablets pequeñas (menor a 768px) */
-  @media (max-width: 768px) {
+    background: linear-gradient(
+        0deg,
+        #09090b 0%,
+        transparent 35%,
+        rgba(9, 9, 11, 0.15) 100%
+    );
+
+    pointer-events: none;
+}
+
+/* FONDO PARA MÓVILES Y TABLETS */
+@media screen and (max-width: 768px) {
+
     .hero-background {
-      top: 4rem;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: -2;
-      background-position: center top; 
-      background-image:
-        linear-gradient(
-          to bottom,
-          rgba(9, 9, 11, 0.95) 0%,   
-          rgba(9, 9, 11, 0.75) 50%,  
-          rgba(9, 9, 11, 0.3) 100%   
-        ),
-        url("imagenes/fondoAlterno.jpeg");
+        background-image:
+            linear-gradient(
+                to bottom,
+                rgba(9, 9, 11, 0.95) 0%,
+                rgba(9, 9, 11, 0.75) 50%,
+                rgba(9, 9, 11, 0.3) 100%
+            ),
+            url("imagenes/fondoAlterno.jpeg");
+
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
     }
-    
-    .hero-overlay {
-      top: 4rem;
-    }
-  }
+
+}
 
   /* Hamburguesa animada */
   .bar { display: block; height: 2px; width: 22px; background: #f2efe9; border-radius: 2px; transition: transform .35s, opacity .25s; }
