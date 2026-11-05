@@ -383,7 +383,6 @@ tailwind.config = {
     { n: 'Mug Mágico· Café y vapor', t: 'Sublimación', d: 'Taza negra de estilo elegante y minimalista, ideal para disfrutar de un café con un diseño sobrio y moderno.', img: 'imagenes/mugs/mugMagico.jpg' },
     { n: 'Navidad · Diseño Festivo', t: 'Sublimación', d: 'Taza blanca con una ilustración navideña de "HO HO HO" en estampado de cuadros, decorada con un reno, Papá Noel y un muñeco de nieve. Perfecta para la temporada festiva y regalos personalizados.', img: 'imagenes/mugs/new4.jpeg'}, 
     { n: 'Fútbol americano · Arte deportivo', t: 'Sublimación', d: 'Taza blanca con una ilustración deportiva multicolor de un jugador de fútbol americano. Perfecta para aficionados y regalos personalizados.', img: 'imagenes/mugs/FUT AMERI1.png' }
-
   ];
 
   const hues = [40, 24, 14, 48, 30, 18];
@@ -453,6 +452,52 @@ tailwind.config = {
   document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
 
   $('#year').textContent = new Date().getFullYear();
+
+  /* ========================================================================= */
+  /* ---------- NUEVO: CONEXIÓN CON CONTENTFUL (AGREGAR TARJETAS) ---------- */
+  /* ========================================================================= */
+  const SPACE_ID = '7vgzels505et';
+  const ACCESS_TOKEN = 'kCEa7mD3O0722t7KJCIwak8sPEshDjeZxPz3lbzI0Mk';
+  const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=producto`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+      if (!datos.items || datos.items.length === 0) return; // Si no ha subido nada, termina aquí
+
+      // Buscar las URLs de las imágenes en Contentful
+      const assets = datos.includes ? datos.includes.Asset : [];
+      const getImageUrl = (imageId) => {
+        const asset = assets.find(a => a.sys.id === imageId);
+        return asset ? 'https:' + asset.fields.file.url : '';
+      };
+
+      // Formatear los productos nuevos igual a tus arreglos originales
+      const productosNuevos = datos.items.map(item => {
+        const imgId = item.fields.imagen ? item.fields.imagen.sys.id : null;
+        return {
+          n: item.fields.nombre || 'Sin título',
+          t: item.fields.tecnica || 'Estampado',
+          c: item.fields.categoria || '',
+          d: item.fields.descripcion || '',
+          img: imgId ? getImageUrl(imgId) : null
+        };
+      });
+
+      // Separar los productos nuevos por categoría
+      const nuevosBuzos = productosNuevos.filter(p => p.c.toLowerCase().includes('buzo'));
+      const nuevasCamisetas = productosNuevos.filter(p => p.c.toLowerCase().includes('camiseta'));
+      const nuevosMugs = productosNuevos.filter(p => p.c.toLowerCase().includes('mug'));
+
+      // Sumar los originales con los nuevos y volver a dibujar SOLO si hay nuevos en esa categoría
+      if (nuevasCamisetas.length > 0) renderGrid('#gridCamisetas', [...camisetas, ...nuevasCamisetas], shirtIcon, 'camiseta');
+      if (nuevosMugs.length > 0) renderGrid('#gridMugs', [...mugs, ...nuevosMugs], mugIcon, 'mug');
+      if (nuevosBuzos.length > 0) renderGrid('#gridBuzos', [...buzos, ...nuevosBuzos], buztIcon, 'buzo');
+
+      // Activar las animaciones de scroll para las nuevas tarjetas recién agregadas
+      document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+    })
+    .catch(error => console.error("Error conectando con el panel:", error));
 </script>
 </body>
 </html>
