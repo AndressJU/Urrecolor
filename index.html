@@ -66,21 +66,20 @@ tailwind.config = {
 
   /* Fondo con imagen para la portada */
   
-
+/* Fondo con imagen para la portada (Escritorio / PC) */
   .hero-background {
     position: absolute;
-   top: 4rem; 
+    top: 4rem; 
     left: 0;
     right: 0;
     bottom: 0;
     z-index: -2;
     background-image:
-      /* Degradado de izquierda a derecha para PC: tapa el buzo izquierdo, deja ver a la pareja a la derecha */
       linear-gradient(
-       60deg,
+        60deg,
         rgba(9, 9, 11, 0.45) 0%,
         rgba(9, 9, 11, 0.25) 45%,
-        rgba(9, 9, 11, 0.05) 100%  /* Transparente a la derecha */
+        rgba(9, 9, 11, 0.05) 100%
       ),
       url("imagenes/Fondo_actualizado.jpg");
     background-size: cover;
@@ -88,39 +87,45 @@ tailwind.config = {
     background-repeat: no-repeat;
   }
 
-  @media (max-width: 639px) {
-    .hero-background {
-      /* Mueve la imagen a la derecha para centrar a ambos modelos */
-      background-position: 70% 10%; 
-      top: 4rem; 
-    left: 0;
-    right: 0;
-    bottom: 0;
-        z-index: -1;
-
-      background-image:
-        /* Degradado de arriba hacia abajo para móvil: contrasta el texto centrado */
-        linear-gradient(
-          to bottom,
-          rgba(9, 9, 11, 0.95) 0%,   /* Muy oscuro arriba donde va el título */
-          rgba(9, 9, 11, 0.85) 60%,  /* Oscuro en el centro para el párrafo */
-          rgba(9, 9, 11, 0.2) 100%   /* Más claro abajo para ver la ropa */
-        ),
-      url("imagenes/Fondo_actualizado.jpg");
-    }
-  }
   /* Oscurecimiento adicional para mantener la estética */
   .hero-overlay {
     position: absolute;
-    inset: 0;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
     z-index: -1;
     background: linear-gradient(
-      0deg,
-      #09090b 0%,
-      transparent 35%,
-      rgba(9, 9, 11, 0.15) 100%
+      60deg,
+      rgba(9, 9, 11, 0.45) 0%,
+        rgba(9, 9, 11, 0.25) 45%,
+        rgba(9, 9, 11, 0.05) 100%
     );
     pointer-events: none;
+  }
+
+  /* Ajustes SOLO para Móvil (menor a 640px) */
+  @media (max-width: 639px) {
+    .hero-background {
+      top: 4rem;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -2;
+      background-position: center top; 
+      background-image:
+        linear-gradient(
+          60deg,
+          rgba(9, 9, 11, 0.95) 00%,   /* Muy oscuro arriba donde va el título */
+          rgba(9, 9, 11, 0.75) 20%,  /* Oscuro en el centro para el párrafo */
+          rgba(9, 9, 11, 0.3) 100%   /* Más claro abajo para ver la ropa */
+        ),
+        url("imagenes/fondoAlterno.jpeg");
+    }
+    
+    .hero-overlay {
+      top: 4rem;
+    }
   }
 
   /* Hamburguesa animada */
@@ -146,7 +151,7 @@ tailwind.config = {
 
   /* Formulario */
   .lbl { display: block; margin-bottom: .4rem; font-size: .85rem; font-weight: 600; color: #c9c9d1; }
-  .field { width: 100%; background: #0b0b0e; border: 1px solid #26262d; border-radius: .85rem; padding: .8rem 1rem; color: #f2efe9; transition: border-color .2s, box-shadow .2s; }
+  .field { width: 100%; background: #0b0b0e; border: 1px solid #26262d; border-radius: .85rem; padding: `.8rem 1rem`; color: #f2efe9; transition: border-color .2s, box-shadow .2s; }
   .field::placeholder { color: #5d5d68; }
   .field:focus { outline: 0; border-color: #ff9d1c; box-shadow: 0 0 0 3px rgba(255,157,28,.18); }
 
@@ -154,22 +159,6 @@ tailwind.config = {
     html { scroll-behavior: auto; }
     .reveal { opacity: 1; transform: none; transition: none; }
     .float { animation: none; }
-  }
-
-  /* Ajustes SOLO para Móvil (menor a 640px) */
-  @media (max-width: 639px) {
-    .hero-background {
-      /* Desplaza al modelo un poco a la derecha para liberar espacio al texto */
-      background-position: 75% top; 
-      background-image:
-        linear-gradient(
-          to top, 
-          rgba(9, 9, 11, 0.95) 0%,   /* Muy oscuro abajo */
-          rgba(9, 9, 11, 0.75) 50%,  /* Medio oscuro en el centro */
-          rgba(9, 9, 11, 0.3) 100%
-        ),
-      url("imagenes/Fondo_actualizado.jpg");
-    }
   }
 </style>
 </head>
