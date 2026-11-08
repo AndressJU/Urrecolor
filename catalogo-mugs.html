@@ -159,6 +159,47 @@ tailwind.config = {
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* ========================================================================= */
+  /* ---------- NUEVO: CONEXIÓN CON CONTENTFUL PARA CAMISETAS ---------------- */
+  /* ========================================================================= */
+  const SPACE_ID = '7vgzels505et';
+  const ACCESS_TOKEN = 'kCEa7mD3O0722t7KJCIwak8sPEshDjeZxPz3lbzI0Mk';
+  const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=producto`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+      if (!datos.items || datos.items.length === 0) return;
+
+      const assets = datos.includes ? datos.includes.Asset : [];
+      const getImageUrl = (imageId) => {
+        const asset = assets.find(a => a.sys.id === imageId);
+        return asset ? 'https:' + asset.fields.file.url : '';
+      };
+
+      const productosNuevos = datos.items.map(item => {
+        const imgId = item.fields.imagen ? item.fields.imagen.sys.id : null;
+        return {
+          n: item.fields.nombre || 'Sin título',
+          t: item.fields.tecnica || 'Estampado',
+          c: item.fields.categoria || '',
+          d: item.fields.descripcion || '',
+          img: imgId ? getImageUrl(imgId) : null
+        };
+      });
+
+      // Filtramos únicamente las que correspondan a mugs
+      const nuevosMugs = productosNuevos.filter(p => p.c.toLowerCase().includes('mug'));
+
+      if (nuevosMugs.length > 0) {
+        // Combinamos los mugs locales con los nuevos del panel y redibujamos
+        const todosLosMugs = [...mugs, ...nuevosMugs];
+        renderSmallGrid('#gridCatalogo', todosLosMugs, mugIcon, 'mug');
+
+        document.querySelectorAll('#gridCatalogo .reveal:not(.in)').forEach(el => io.observe(el));
+      }
+    })
+    .catch(error => console.error("Error conectando con el panel de mugs:", error));
 </script>
 </body>
 </html>

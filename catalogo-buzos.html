@@ -158,6 +158,46 @@ tailwind.config = {
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+/* ========================================================================= */
+  /* ---------- NUEVO: LO ÚNICO QUE SE AÑADE PARA CONECTAR CONTENTFUL -------- */
+  /* ========================================================================= */
+  const SPACE_ID = '7vgzels505et';
+  const ACCESS_TOKEN = 'kCEa7mD3O0722t7KJCIwak8sPEshDjeZxPz3lbzI0Mk';
+  const url = `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/master/entries?access_token=${ACCESS_TOKEN}&content_type=producto`;
+
+  fetch(url)
+    .then(res => res.json())
+    .then(datos => {
+      if (!datos.items || datos.items.length === 0) return;
+
+      const assets = datos.includes ? datos.includes.Asset : [];
+      const getImageUrl = (imageId) => {
+        const asset = assets.find(a => a.sys.id === imageId);
+        return asset ? 'https:' + asset.fields.file.url : '';
+      };
+
+      const productosNuevos = datos.items.map(item => {
+        const imgId = item.fields.imagen ? item.fields.imagen.sys.id : null;
+        return {
+          n: item.fields.nombre || 'Sin título',
+          t: item.fields.tecnica || 'Estampado',
+          c: item.fields.categoria || '',
+          d: item.fields.descripcion || '',
+          img: imgId ? getImageUrl(imgId) : null
+        };
+      });
+
+      // Filtramos solo los que correspondan a buzos
+      const nuevosBuzos = productosNuevos.filter(p => p.c.toLowerCase().includes('buzo'));
+
+      if (nuevosBuzos.length > 0) {
+        // Sumamos tus buzos locales con los nuevos de Contentful y redibujamos
+        const todosLosBuzos = [...buzos, ...nuevosBuzos];
+        renderSmallGrid('#gridCatalogo', todosLosBuzos, BuzIcon, 'buzos');
+        document.querySelectorAll('#gridCatalogo .reveal:not(.in)').forEach(el => io.observe(el));
+      }
+    })
+    .catch(error => console.error("Error conectando con el panel:", error));
 </script>
 </body>
 </html>
